@@ -18,7 +18,7 @@ export default function Search(props: HeaderProps & UserNameProps & UserInfoProp
       
     }
    
-  }; console.log(props.userInfo);
+  }; 
   return (
     <SearchContainer isDark={props.isDark}>
       <img src={searchIcon} alt="searcIcon" />
