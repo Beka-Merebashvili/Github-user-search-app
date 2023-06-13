@@ -12,11 +12,19 @@ const [userName , setUserName] = useState<string>("octocat")
 
 useEffect(() => {
   const request = async () => {
+    
+     
+    
+  try {   
     const response = await axios.get(
       ` https://api.github.com/users/${userName}`
     );
     const data = await response.data;
-    setUserInfo(data);
+     setUserInfo(data);
+  }  catch(error) {
+    console.log();
+    
+  }
   };
   request();
 }, []);

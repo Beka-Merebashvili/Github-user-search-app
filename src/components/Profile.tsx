@@ -8,10 +8,15 @@ import moment from "moment";
 export default function Profile(props: HeaderProps & UserInfoProps) {
   const createdAt = props.userInfo?.created_at;
   const formattedDate = moment(createdAt).format("DD MMM YYYY");
-  console.log(props.userInfo?.blog);
+   
+  const infoBoxes = [
+    { name: 'Repos', stat: props.userInfo?.public_repos },
+    { name: 'Followers', stat: props.userInfo?.followers },
+    { name: 'Following', stat: props.userInfo?.following },
+  ];
   
   return (
-    <ProfileContainer isDark={props.isDark}>
+    <ProfileContainer isDark={props.isDark} userInfo={props.userInfo}>
       <div className="userInfo">
         <img src={props.userInfo?.avatar_url} alt="userAvatar" />
         <div className="mainInfo">
@@ -22,42 +27,31 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
       </div>
       <p>{props.userInfo?.bio}</p>
       <div className="followers">
-        <div className="infoBox">
-          <p className="statNme">Repos</p>
-          <p className="stat">{props.userInfo?.public_repos}</p>
-        </div>
-        <div className="infoBox">
-          <p className="statNme">Followers</p>
-          <p className="stat">{props.userInfo?.followers}</p>
-        </div>
-        <div className="infoBox">
-          <p className="statNme">Following</p>
-          <p className="stat">{props.userInfo?.following}</p>
-        </div>
+    {infoBoxes.map((infoBox, index) => (
+      <div className="infoBox" key={index}>
+        <p className="statNme">{infoBox.name}</p>
+        <p className="stat">{infoBox.stat}</p>
       </div>
-      <div className="wrapper">
-        <div className="wrapperInfo">
-          <img src={locationIcon} alt="locationIcon" />
-          <p>{props.userInfo?.location == null ? "Not Available" : props.userInfo?.location}</p>
-        </div>
-         <div className="wrapperInfo">
-          <img src={websiteIcon} alt="websiteIcon" />
-          <p>{props.userInfo?.blog == null ? "Not Available" : props.userInfo?.blog}</p>
-        </div>
-         <div className="wrapperInfo">
-          <img src={twwiterIcon} alt="websiteIcon" />
-          <p>{props.userInfo?.twitter_username == null ? "Not Available" : props.userInfo?.twitter_username}</p>
-        </div>
-         <div className="wrapperInfo">
-          <img src={companyIcon} alt="companyIcon" />
-          <p>{props.userInfo?.company == null ? "Not Available" : props.userInfo?.company}</p>
-        </div>
-      </div>
+    ))}
+  </div>
+  <div className="wrapper">
+  {[
+    { icon: locationIcon, alt: 'locationIcon', value: props.userInfo?.location },
+    { icon: websiteIcon, alt: 'websiteIcon', value: props.userInfo?.blog },
+    { icon: twwiterIcon, alt: 'websiteIcon', value: props.userInfo?.twitter_username },
+    { icon: companyIcon, alt: 'companyIcon', value: props.userInfo?.company },
+  ].map((item, index) => (
+    <div className={!item.value  ? "nullValue wrapperInfo" : "wrapperInfo"}  key={index}>
+      <img src={item.icon} alt={item.alt} />
+      <p >{!item.value  ? 'Not Available' : item.value}</p>
+    </div>
+  ))}
+</div>
     </ProfileContainer>
   );
 }
 
-const ProfileContainer = styled.div<{ isDark: boolean }>`
+const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
   width: 328px;
   height: 518px;
   background: ${(props) => (props.isDark ? "#1E2A47" : "#FEFEFE")};
@@ -139,13 +133,18 @@ const ProfileContainer = styled.div<{ isDark: boolean }>`
     align-items: center;
     gap: 16px;
   }
+  .nullValue {
+     
+    opacity: 0.5;
+}
   .wrapperInfo img {
     filter: ${(props)=> (props.isDark ? "invert(100%) sepia(0%) saturate(0%) hue-rotate(326deg) brightness(1000%) contrast(102%)" : null)} ;
   }
-  .wrapperInfo p {
+  .wrapperInfo p , .nullValue p{
     font-weight: 400;
     font-size: 13px;
     line-height: 19px;
     color: ${(props) => (props.isDark ? "#FFFFFF" : "#4b6a9b")}; 
   }
+ 
 `;
