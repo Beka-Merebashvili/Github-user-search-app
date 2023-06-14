@@ -46,13 +46,13 @@ const SearchContainer = styled.div<{ isDark: boolean }>`
   border: none;
   margin: 36px 0 16px 0;
   input {
-    width: 180px;
+    width: 176px;
     height: 25px;
     margin: 0 7px 0 10px;
     font-size: 13px;
     font-weight: 400;
     color: ${(props) => (props.isDark ? "#ffffff" : "#4B6A9B")};
-    background: ${(props) => (props.isDark ? "#1E2A47" : "#FEFEFE")};
+    background: ${(props) => (props.isDark ? "#1E2A47" : "#ffffff")};
     outline: none;
     border: none;
     &::placeholder {
@@ -63,7 +63,6 @@ const SearchContainer = styled.div<{ isDark: boolean }>`
    font-weight: 700;
    font-size: 12px;
    color: #F74646;
-
   }
   button {
     width: 84px;
