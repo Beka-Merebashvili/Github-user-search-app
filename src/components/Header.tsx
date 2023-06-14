@@ -44,4 +44,10 @@ const HeaderContaier = styled.div<{isDark: boolean }>`
     letter-spacing: 2.5px;
     color: ${(props) => (props.isDark ? "#FFFFFF" : "#4b6a9b")}; 
   }
+
+/* styles for tablet */
+
+  @media only screen and (min-width: 768px) {
+    width: 574px;
+  }
 `;

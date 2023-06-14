@@ -15,6 +15,17 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
     { name: 'Following', stat: props.userInfo?.following },
   ];
   
+  const gitIfo = [
+    { icon: locationIcon, alt: 'locationIcon', value: props.userInfo?.location },
+    { icon: websiteIcon, alt: 'websiteIcon', value: props.userInfo?.blog },
+  ]
+
+  const gitIfo2 = [
+    { icon: twwiterIcon, alt: 'websiteIcon', value: props.userInfo?.twitter_username },
+    { icon: companyIcon, alt: 'companyIcon', value: props.userInfo?.company },
+  ]
+
+
   return (
     <ProfileContainer isDark={props.isDark} userInfo={props.userInfo}>
       <div className="userInfo">
@@ -35,13 +46,16 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
     ))}
   </div>
   <div className="wrapper">
-  {[
-    { icon: locationIcon, alt: 'locationIcon', value: props.userInfo?.location },
-    { icon: websiteIcon, alt: 'websiteIcon', value: props.userInfo?.blog },
-    { icon: twwiterIcon, alt: 'websiteIcon', value: props.userInfo?.twitter_username },
-    { icon: companyIcon, alt: 'companyIcon', value: props.userInfo?.company },
-  ].map((item, index) => (
+  {gitIfo.map((item, index) => (
     <div className={!item.value  ? "nullValue wrapperInfo" : "wrapperInfo"}  key={index}>
+      <img src={item.icon} alt={item.alt} />
+      <p >{!item.value  ? 'Not Available' : item.value}</p>
+    </div>
+  ))}
+</div>
+<div className="wrapper2">
+{gitIfo2.map((item, index) => (
+    <div className={!item.value  ? "nullValue wrapperInfo2" : "wrapperInfo"}  key={index}>
       <img src={item.icon} alt={item.alt} />
       <p >{!item.value  ? 'Not Available' : item.value}</p>
     </div>
@@ -135,7 +149,18 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
     flex-direction: column;
     gap: 18px;
   }
+  .wrapper2 {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 18px;
+  }
   .wrapperInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .wrapperInfo2 {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -153,4 +178,73 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
     color: ${(props) => (props.isDark ? "#FFFFFF" : "#4b6a9b")}; 
   }
  
+/* styles for tablet */
+
+@media only screen and (min-width: 768px) {
+  width: 574px;
+  height: 480px;
+  padding: 40px 0 0 40px;
+  .userInfo {
+    gap: 40px;
+  }
+  .userInfo img {
+    width: 116px;
+    height: 116px;
+  }
+  .name {
+    font-size: 26px;
+    line-height: 38px;
+  }
+  .login {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .createdAt {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .bio {
+    font-size: 15px;
+    margin-top: 24px;
+  }
+  .followers {
+    width: 492px;
+    gap: 98px;
+    margin: 32px 0;
+    padding: 16px 0 0 32px;
+  }
+  .infoBox {
+    align-items: start;
+  }
+  .statNme {
+    font-size: 13px;
+    line-height: 19px;
+  }
+  .stat {
+    font-size: 22px;
+    line-height: 33px;
+  }
+  .wrapper {
+    width: 440px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .wrapper2 {
+    width: 356px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .wrapperInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
 `;
