@@ -13,7 +13,6 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 30px;
-    /* background: #F6F8FF; */
     background: ${(props) => (props.isDark ? "#141D2F" : "#F6F8FF;")};
 }
 `;

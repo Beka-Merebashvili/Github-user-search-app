@@ -49,7 +49,7 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
   {gitIfo.map((item, index) => (
     <div className={!item.value  ? "nullValue wrapperInfo" : "wrapperInfo"}  key={index}>
       <img src={item.icon} alt={item.alt} />
-      <p>{!item.value  ? 'Not Available' : item.value}</p>
+      {index==1 ? <a target="blank" href={item.value} >{!item.value  ? 'Not Available' : item.value}</a> :  <p>{!item.value  ? 'Not Available' : item.value}</p> }
     </div>
   ))}
 </div>
@@ -171,7 +171,7 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
   .wrapperInfo img {
     filter: ${(props)=> (props.isDark ? "invert(100%) sepia(0%) saturate(0%) hue-rotate(326deg) brightness(1000%) contrast(102%)" : null)} ;
   }
-  .wrapperInfo p , .nullValue p{
+  .wrapperInfo p , .wrapperInfo a ,  .nullValue p{
     font-weight: 400;
     font-size: 13px;
     line-height: 19px;
@@ -247,4 +247,12 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
   }
 }
 
+
+/* styles for desktop */
+
+@media only screen and (min-width: 1440px) {
+  width: 730px;
+  height: 444px;
+  padding: 48px 0 0 48px;
+}
 `;
