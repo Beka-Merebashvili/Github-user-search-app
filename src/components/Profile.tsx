@@ -49,7 +49,7 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
   {gitIfo.map((item, index) => (
     <div className={!item.value  ? "nullValue wrapperInfo" : "wrapperInfo"}  key={index}>
       <img src={item.icon} alt={item.alt} />
-      <p >{!item.value  ? 'Not Available' : item.value}</p>
+      <p>{!item.value  ? 'Not Available' : item.value}</p>
     </div>
   ))}
 </div>

@@ -45,6 +45,7 @@ const SearchContainer = styled.div<{ isDark: boolean }>`
   border-radius: 15px;
   border: none;
   margin: 36px 0 16px 0;
+  position: relative;
   input {
     width: 176px;
     height: 25px;
@@ -63,6 +64,9 @@ const SearchContainer = styled.div<{ isDark: boolean }>`
    font-weight: 700;
    font-size: 12px;
    color: #F74646;
+   position: absolute;
+   left: 240px;
+   top: 58px;
   }
   button {
     width: 84px;
@@ -85,10 +89,27 @@ const SearchContainer = styled.div<{ isDark: boolean }>`
     margin: 0 122px 0 22px;
     font-size: 18px;
   }
+  .noResult {
+    font-size: 15px;
+    top: 28px;
+    left: 360px;
+  }
   button {
     width: 106px;
     height: 50px;
     font-size: 16px;
   }
+  }
+
+
+  /* styles for desktop */
+  @media only screen and (min-width: 1440px) {
+    width: 730px;
+    input {
+      margin: 0 280px 0 24px;
+    }
+    .noResult {
+      left: 500px;
+    }
   }
 `;

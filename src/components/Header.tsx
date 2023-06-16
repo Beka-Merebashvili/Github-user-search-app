@@ -50,4 +50,11 @@ const HeaderContaier = styled.div<{isDark: boolean }>`
   @media only screen and (min-width: 768px) {
     width: 574px;
   }
+
+
+  /* styles for desktop */
+
+  @media only screen and (min-width: 1440px) {
+    width: 730px;
+  }
 `;
