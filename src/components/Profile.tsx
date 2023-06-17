@@ -27,7 +27,7 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
 
 
   return (
-    <ProfileContainer isDark={props.isDark} userInfo={props.userInfo}>
+    <ProfileContainer isDark={props.isDark} userInfo={props.userInfo} >
       <div className="userInfo">
         <img src={props.userInfo?.avatar_url} alt="userAvatar" />
         <div className="mainInfo">
@@ -49,13 +49,13 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
   {gitIfo.map((item, index) => (
     <div className={!item.value  ? "nullValue wrapperInfo" : "wrapperInfo"}  key={index}>
       <img src={item.icon} alt={item.alt} />
-      {index==1 ? <a target="blank" href={item.value} >{!item.value  ? 'Not Available' : item.value}</a> :  <p>{!item.value  ? 'Not Available' : item.value}</p> }
+      {index==1 ? ( item.value ? <a target="blank" href={item.value ? item.value : ""} >{item.value}</a> :  <p>Not Available </p>) : <p>{!item.value  ? 'Not Available' : item.value}</p> }
     </div>
   ))}
 </div>
 <div className="wrapper2">
 {gitIfo2.map((item, index) => (
-    <div className={!item.value  ? "nullValue wrapperInfo2" : "wrapperInfo"}  key={index}>
+    <div className={!item.value  ? "nullValue wrapperInfo" : "wrapperInfo"}  key={index}>
       <img src={item.icon} alt={item.alt} />
       <p >{!item.value  ? 'Not Available' : item.value}</p>
     </div>
@@ -65,7 +65,7 @@ export default function Profile(props: HeaderProps & UserInfoProps) {
   );
 }
 
-const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
+const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null ,}>`
   width: 328px;
   height: 518px;
   background: ${(props) => (props.isDark ? "#1E2A47" : "#FEFEFE")};
@@ -144,23 +144,15 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
     line-height: 24px;
     color: ${(props) => (props.isDark ? "#FFFFFF" : "#2B3442")};
   }
-  .wrapper {
+  .wrapper , .wrapper2 {
     display: flex;
     flex-direction: column;
     gap: 18px;
   }
   .wrapper2 {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
     margin-top: 18px;
   }
   .wrapperInfo {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .wrapperInfo2 {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -224,29 +216,21 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
     font-size: 22px;
     line-height: 33px;
   }
-  .wrapper {
-    width: 440px;
+  .wrapper , .wrapper2{
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: 18px;
+    gap: 80px;
   }
-  .wrapper2 {
-    width: 356px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 18px;
+  .wrapper p, .wrapper2 p {
+    width: 150px;
   }
   .wrapperInfo {
     display: flex;
     align-items: center;
     gap: 16px;
   }
-  .wrapperInfo a{
-    max-width: 180px;
+  .wrapperInfo a {
+     max-width: 180px;
   }
   .wrapperInfo a:hover{
     text-decoration: underline;
