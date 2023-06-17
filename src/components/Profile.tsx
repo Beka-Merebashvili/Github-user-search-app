@@ -246,7 +246,10 @@ const ProfileContainer = styled.div<{ isDark: boolean , userInfo: Info | null}>`
     gap: 16px;
   }
   .wrapperInfo a{
-    width: 180px;
+    max-width: 180px;
+  }
+  .wrapperInfo a:hover{
+    text-decoration: underline;
   }
 }
 
